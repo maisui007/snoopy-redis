@@ -1,5 +1,6 @@
 package com.snoopy.redis.config.support;
 
+import com.snoopy.redis.major.dao.impl.UserDaoImpl;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -26,8 +27,8 @@ public class RedisCacheConfig extends CachingConfigurerSupport{
     }
 
     @Bean
-    public RedisTemplate<String,String> redisTemplate(RedisConnectionFactory redisConnectionFactory){
-        RedisTemplate<String,String> redisTemplate = new RedisTemplate<String, String>();
+    public RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory){
+        RedisTemplate redisTemplate = new RedisTemplate();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
         return redisTemplate;
     }
@@ -39,4 +40,12 @@ public class RedisCacheConfig extends CachingConfigurerSupport{
         cacheManager.setDefaultExpiration(3000);//Sets the default expire time (in seconds).
         return cacheManager;
     }
+
+    @Bean
+    public UserDaoImpl userDao(){
+        UserDaoImpl userDao = new UserDaoImpl();
+        return  userDao;
+    }
+
+
 }
