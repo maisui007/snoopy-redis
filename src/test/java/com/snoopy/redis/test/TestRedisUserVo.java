@@ -41,6 +41,14 @@ public class TestRedisUserVo extends TestBaseCase{
 
     @Test
     public void testBatchAddUserVoThroughPipeline(){
+        List<UserVo> userVoList = new ArrayList<UserVo>();
+        for (int i = 0; i < 50000; i++) {
+            UserVo uservo = new UserVo();
+            uservo.setId("0001"+i);
+            uservo.setName("snoopy"+i);
+            userVoList.add(uservo);
+        }
+        userDao.add(userVoList);
 
     }
     @Test
